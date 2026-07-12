@@ -1,0 +1,70 @@
+import { Resend } from "resend";
+
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+
+export default async function handler(req,res){
+
+if(req.method !== "POST"){
+return res.status(405).json({error:"Method not allowed"});
+}
+
+
+const data=req.body;
+
+
+try{
+
+
+await resend.emails.send({
+
+from:"CawCleanzIt Reviews <onboarding@resend.dev>",
+
+to:"crowcawcaw88@gmail.com",
+
+subject:"New CawCleanzIt Review",
+
+text:
+
+`
+New Review:
+
+Stars: ${data.stars}
+
+Cleaned:
+${data.cleaned}
+
+Time:
+${data.time}
+
+Quality:
+${data.quality}
+
+Name:
+${data.name}
+
+Email:
+${data.email}
+
+Improvements:
+${data.improve}
+
+`
+
+});
+
+
+res.status(200).json({success:true});
+
+
+}
+
+catch(error){
+
+res.status(500).json({error:error.message});
+
+}
+
+
+}
