@@ -19,11 +19,11 @@ try{
 
 await resend.emails.send({
 
-from:"CawCleanzIt Reviews <onboarding@resend.dev>",
+from:"NextGen Reviews <onboarding@resend.dev>",
 
-to:"crowcawcaw88@gmail.com",
+to:"nextgenrepairs@proton.me",
 
-subject:"New CawCleanzIt Review",
+subject:"New NextGen Review",
 
 text:
 
@@ -32,13 +32,13 @@ New Review:
 
 Stars: ${data.stars}
 
-Cleaned:
+Repaired:
 ${data.cleaned}
 
 Time:
 ${data.time}
 
-Quality:
+Helpfulness:
 ${data.quality}
 
 Name:
