@@ -1,70 +1,46 @@
 import { Resend } from "resend";
 
-
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
-export default async function handler(req,res){
+  const data = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
 
-if(req.method !== "POST"){
-return res.status(405).json({error:"Method not allowed"});
-}
-
-
-const data=req.body;
-
-
-try{
-
-
-await resend.emails.send({
-
-from:"NextGen Reviews <onboarding@resend.dev>",
-
-to:"nextgenfixers@proton.me",
-
-subject:"New NextGen Review",
-
-text:
-
-`
+  try {
+    await resend.emails.send({
+      from: "NextGen Reviews <onboarding@resend.dev>",
+      to: "nextgenfixers@proton.me",
+      subject: "New NextGen Review",
+      text: `
 New Review:
 
-Stars: ${data.stars}
+Stars: ${data.stars || "N/A"}
 
 Repaired:
-${data.repaired}
+${data.repaired || "N/A"}
 
 Time:
-${data.time}
+${data.time || "N/A"}
 
 Helpfulness:
-${data.helpfulness}
+${data.helpfulness || "N/A"}
 
 Name:
-${data.name}
+${data.name || "N/A"}
 
 Email:
-${data.email}
+${data.email || "N/A"}
 
 Improvements:
-${data.improve}
-
+${data.improve || "None provided"}
 `
+    });
 
-});
-
-
-res.status(200).json({success:true});
-
-
-}
-
-catch(error){
-
-res.status(500).json({error:error.message});
-
-}
-
-
+    res.status(200).json({ success: true });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 }
