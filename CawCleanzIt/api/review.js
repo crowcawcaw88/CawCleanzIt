@@ -21,7 +21,7 @@ await resend.emails.send({
 
 from:"NextGen Reviews <onboarding@resend.dev>",
 
-to:"nextgenfixers@proton.me",
+to:"crowcawcaw88@gmail.com",
 
 subject:"New NextGen Review",
 
