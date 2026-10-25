@@ -33,13 +33,13 @@ New Review:
 Stars: ${data.stars}
 
 Repaired:
-${data.cleaned}
+${data.repaired}
 
 Time:
 ${data.time}
 
 Helpfulness:
-${data.quality}
+${data.helpfulness}
 
 Name:
 ${data.name}
